@@ -63,13 +63,40 @@ func constructFromPrePost(pre []int, post []int) *TreeNode {
 	return root
 }
 
+// pre search
 func (node *TreeNode) traverse() {
 	if node == nil {
 		return
 	}
-	node.Left.traverse()
 	fmt.Print(strconv.Itoa(node.Val) + " ")
+	node.Left.traverse()
 	node.Right.traverse()
+}
+
+func (root *TreeNode) BFS() [][]int {
+	res := [][]int{}
+	if root == nil {
+		return res
+	}
+	queue := []*TreeNode{}
+	queue = append(queue, root)
+	for len(queue) != 0 {
+		cl := []int{}
+		size := len(queue)
+		for i := 0; i < size; i++ {
+			current := queue[0]
+			queue = queue[1:]
+			cl = append(cl, current.Val)
+			if current.Left != nil {
+				queue = append(queue, current.Left)
+			}
+			if current.Right != nil {
+				queue = append(queue, current.Right)
+			}
+		}
+		res = append(res, cl)
+	}
+	return res
 }
 
 func main() {
@@ -79,4 +106,6 @@ func main() {
 	var post = []int{4, 5, 2, 6, 7, 3, 1}
 	var tree = constructFromPrePost(pre, post)
 	tree.traverse()
+	var bfslist = tree.BFS()
+	fmt.Println(bfslist)
 }
