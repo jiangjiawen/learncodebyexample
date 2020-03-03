@@ -99,13 +99,28 @@ func (root *TreeNode) BFS() [][]int {
 	return res
 }
 
+func (root *TreeNode) DFS(depth int, res *[][]int) {
+	if root == nil {
+		return
+	}
+	for len(*res) <= depth {
+		*res = append(*res, []int{})
+	}
+	root.Left.DFS(depth+1, res)
+	root.Right.DFS(depth+1, res)
+	(*res)[depth] = append((*res)[depth], root.Val)
+}
+
 func main() {
 	fmt.Println(mySqrt(8))
 	fmt.Println(perfectnum(0))
 	var pre = []int{1, 2, 4, 5, 3, 6, 7}
-	var post = []int{4, 5, 2, 6, 7, 3, 1}
+	post := []int{4, 5, 2, 6, 7, 3, 1}
 	var tree = constructFromPrePost(pre, post)
 	tree.traverse()
 	var bfslist = tree.BFS()
 	fmt.Println(bfslist)
+	var dfslist = [][]int{}
+	tree.DFS(0, &dfslist)
+	fmt.Println(dfslist)
 }
