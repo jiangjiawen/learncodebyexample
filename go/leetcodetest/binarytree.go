@@ -12,6 +12,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+//根据前序和后序遍历构造二叉树
 func constructFromPrePost(pre []int, post []int) *TreeNode {
 	if len(pre) == 0 || len(pre) != len(post) {
 		return nil

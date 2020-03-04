@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+//x的平方根
 func mySqrt(x int) int {
 	if x <= 1 {
 		return x
@@ -13,6 +14,7 @@ func mySqrt(x int) int {
 	return int(r)
 }
 
+//完美数
 func perfectnum(n int) bool {
 	if n == 0 {
 		return true
