@@ -28,6 +28,7 @@ func decodeAtIndex(S string, K int) string {
 }
 
 // 44
+//https://leetcode-cn.com/problems/wildcard-matching/solution/dong-tai-gui-hua-dai-zhu-shi-by-tangweiqun/
 func isMatch(s string, p string) bool {
 	dp := make([][]bool, len(s)+1)
 	for i := 0; i < len(dp); i++ {
