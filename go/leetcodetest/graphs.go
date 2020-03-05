@@ -6,6 +6,7 @@ import (
 )
 
 //332
+//https://leetcode-cn.com/problems/reconstruct-itinerary/solution/custerxue-xi-bi-ji-dfs-tu-de-ou-la-lu-jing-by-cust/
 func findItinerary(tickets [][]string) []string {
 	m := make(map[string][]string, len(tickets)+1)
 	var ans []string
@@ -19,6 +20,8 @@ func findItinerary(tickets [][]string) []string {
 	for k := range m {
 		sort.Strings(m[k])
 	}
+
+	fmt.Println(m)
 
 	DFS("JFK", m, &ans)
 
@@ -54,22 +57,22 @@ func main() {
 	// tickets = append(tickets, row3)
 	// tickets = append(tickets, row4)
 
-	// row1 := []string{"JFK", "SFO"}
-	// row2 := []string{"JFK", "ATL"}
-	// row3 := []string{"SFO", "ATL"}
-	// row4 := []string{"ATL", "JFK"}
-	// row5 := []string{"ATL", "SFO"}
-	// tickets = append(tickets, row1)
-	// tickets = append(tickets, row2)
-	// tickets = append(tickets, row3)
-	// tickets = append(tickets, row4)
-	// tickets = append(tickets, row5)
-
-	row1 := []string{"JFK", "KUL"}
-	row2 := []string{"JFK", "NRT"}
-	row3 := []string{"NRT", "JFK"}
+	row1 := []string{"JFK", "SFO"}
+	row2 := []string{"JFK", "ATL"}
+	row3 := []string{"SFO", "ATL"}
+	row4 := []string{"ATL", "JFK"}
+	row5 := []string{"ATL", "SFO"}
 	tickets = append(tickets, row1)
 	tickets = append(tickets, row2)
 	tickets = append(tickets, row3)
+	tickets = append(tickets, row4)
+	tickets = append(tickets, row5)
+
+	// row1 := []string{"JFK", "KUL"}
+	// row2 := []string{"JFK", "NRT"}
+	// row3 := []string{"NRT", "JFK"}
+	// tickets = append(tickets, row1)
+	// tickets = append(tickets, row2)
+	// tickets = append(tickets, row3)
 	fmt.Println(findItinerary(tickets))
 }
