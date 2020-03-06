@@ -39,6 +39,63 @@ func pileBox(box [][]int) int {
 	return maxdepth
 }
 
+//849
+// func maxDistToClosest(seats []int) int {
+//     maxDis :=0
+//     numofzero :=0
+//     for i:=0;i<len(seats);i++{
+//         if seats[i]==0{
+//             numofzero += 1
+//             if i==(numofzero-1){
+//                 maxDis=numofzero
+//             }
+//         }
+//         if seats[i]==1{
+//             dish := (numofzero+numofzero%2)/2
+//             numofzero = 0
+//             if dish > maxDis {
+//                 maxDis=dish
+//             }
+//         }
+//     }
+//     if numofzero > maxDis{
+//         maxDis = numofzero
+//     }
+//     return maxDis
+// }
+func maxDistToClosest(seats []int) int {
+	size := len(seats)
+	maxDis := 0
+	// e 代表了连续空位的个数
+	// 当连续空位两边都有人的时候，maxDis = (e+e%2)/2
+	// 如果有一边没人的话，      maxDis = e
+	e := 0
+	for i := 0; i < size; i++ {
+		if e == i {
+			// 说明 seats[0:i] 全是 0
+			maxDis = e
+		} else {
+			maxDis = max(maxDis, (e+e%2)/2)
+		}
+		if seats[i] == 1 {
+			e = 0
+		} else {
+			e++
+		}
+	}
+
+	// 当 seats[size-1]==0 的时候
+	// e 最后的值，有可能 > maxDis
+	return max(maxDis, e)
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 func main() {
 	box := [][]int{}
 	row1 := []int{1, 1, 1}
@@ -48,4 +105,6 @@ func main() {
 	box = append(box, row2)
 	box = append(box, row3)
 	fmt.Println(pileBox(box))
+	seats := []int{1,0,0,0,1}
+	fmt.Println(maxDistToClosest(seats))
 }
