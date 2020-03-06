@@ -54,6 +54,62 @@ func isMatch(s string, p string) bool {
 	return dp[0][0]
 }
 
+//301
+func isValid(s string) bool {
+	count := 0
+	for i:=0;i<len(s);i++{
+		if s[i] != '(' && s[i] != ')' {
+			continue
+		} else if s[i] == '(' {
+			count++
+		}else if s[i] == ')' {
+			count--
+		}
+
+		if count < 0 {
+			return false
+		}
+	}
+	return count == 0
+}
+
+func removeInvalidParentheses(s string) []string {
+	result :=make([]string,0)
+	if len(s)==0{
+		result=append(result,"")
+		return result
+	}
+	visited := make(map[string]bool)
+	queue := []string{}
+	queue = append(queue,s)
+	visited[s] = true
+
+	found := false
+	for len(queue) !=0{
+		s:=queue[0]
+		queue = queue[1:]
+		if isValid(s){
+			found=true
+			result = append(result,s)
+		}
+		if found {
+			continue
+		}
+		for i:=0;i<len(s);i++{
+			if s[i] != '(' && s[i]!= ')'{
+				continue
+			}
+			t:=s[0:i]+s[i+1:]
+			if _,ok :=visited[t];!ok{
+				queue = append(queue,t)
+				visited[t] = true
+			}
+		}
+	}
+	return result
+}
+
+
 func main() {
 	S := "leet2code3"
 	K := 10
