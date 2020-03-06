@@ -55,6 +55,8 @@ func isMatch(s string, p string) bool {
 }
 
 //301
+//https://leetcode-cn.com/problems/remove-invalid-parentheses/solution/bfsjian-dan-er-you-xiang-xi-de-pythonjiang-jie-by-/
+// 
 func isValid(s string) bool {
 	count := 0
 	for i:=0;i<len(s);i++{
