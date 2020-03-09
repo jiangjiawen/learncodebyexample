@@ -34,6 +34,33 @@ func perfectnum(n int) bool {
 	}
 }
 
+func minSubArray(s int, nums []int) int {
+	midSave := []int{}
+	var sum, min int
+
+	for i := 0; i < len(nums); i++ {
+		if nums[i] >= s {
+			return 1
+		}
+
+		sum += nums[i]
+		midSave = append(midSave, nums[i])
+		if sum >= s {
+			for {
+				if sum-B[0] < s {
+					break
+				}
+				sum -= B[0]
+				B = B[1:]
+			}
+			if min == 0 || min > len(B) {
+				min = len(B)
+			}
+		}
+	}
+	return min
+}
+
 func main() {
 	fmt.Println(mySqrt(8))
 	fmt.Println(perfectnum(0))
