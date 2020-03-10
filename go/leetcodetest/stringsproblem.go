@@ -1,6 +1,52 @@
 package main
 
-import "fmt"
+import (
+	"bytes"
+	"fmt"
+	"strings"
+)
+
+//68
+func fullJustify(words []string, maxWidth int) []string {
+	justify := []string{}
+	current, curLength := []string{}, 0
+	for i, w := range words {
+		if curLength+len(current)+len(w) > maxWidth {
+			if len(current) == 1 {
+				curLine := current[0] + strings.Repeat(" ", maxWidth-len(current[0]))
+				justify = append(justify, curLine)
+			} else {
+				diff := maxWidth - curLength
+				spaces := diff / (len(current) - 1)
+				more := diff % (len(current) - 1)
+				curLine := bytes.Buffer{}
+				for ci, cw := range current {
+					curLine.WriteString(cw)
+					if ci != len(current)-1 {
+						moreBlanks := 0
+						if more > 0 {
+							moreBlanks = 1
+							more--
+						}
+						curLine.WriteString(strings.Repeat(" ", spaces+moreBlanks))
+					}
+				}
+				justify = append(justify, curLine.String())
+			}
+			current, curLength = []string{}, 0
+		}
+		curLength += len(w)
+		current = append(current, w)
+
+		if i == len(words)-1 {
+			lastLine := strings.Join(current, " ")
+			lastLine = lastLine + strings.Repeat(" ", maxWidth-len(lastLine))
+			justify = append(justify, lastLine)
+		}
+
+	}
+	return justify
+}
 
 //888 索引处的字符串
 func decodeAtIndex(S string, K int) string {
@@ -56,15 +102,15 @@ func isMatch(s string, p string) bool {
 
 //301
 //https://leetcode-cn.com/problems/remove-invalid-parentheses/solution/bfsjian-dan-er-you-xiang-xi-de-pythonjiang-jie-by-/
-// 
+//
 func isValid(s string) bool {
 	count := 0
-	for i:=0;i<len(s);i++{
+	for i := 0; i < len(s); i++ {
 		if s[i] != '(' && s[i] != ')' {
 			continue
 		} else if s[i] == '(' {
 			count++
-		}else if s[i] == ')' {
+		} else if s[i] == ')' {
 			count--
 		}
 
@@ -76,34 +122,34 @@ func isValid(s string) bool {
 }
 
 func removeInvalidParentheses(s string) []string {
-	result :=make([]string,0)
-	if len(s)==0{
-		result=append(result,"")
+	result := make([]string, 0)
+	if len(s) == 0 {
+		result = append(result, "")
 		return result
 	}
 	visited := make(map[string]bool)
 	queue := []string{}
-	queue = append(queue,s)
+	queue = append(queue, s)
 	visited[s] = true
 
 	found := false
-	for len(queue) !=0{
-		s:=queue[0]
+	for len(queue) != 0 {
+		s := queue[0]
 		queue = queue[1:]
-		if isValid(s){
-			found=true
-			result = append(result,s)
+		if isValid(s) {
+			found = true
+			result = append(result, s)
 		}
 		if found {
 			continue
 		}
-		for i:=0;i<len(s);i++{
-			if s[i] != '(' && s[i]!= ')'{
+		for i := 0; i < len(s); i++ {
+			if s[i] != '(' && s[i] != ')' {
 				continue
 			}
-			t:=s[0:i]+s[i+1:]
-			if _,ok :=visited[t];!ok{
-				queue = append(queue,t)
+			t := s[0:i] + s[i+1:]
+			if _, ok := visited[t]; !ok {
+				queue = append(queue, t)
 				visited[t] = true
 			}
 		}
@@ -111,10 +157,12 @@ func removeInvalidParentheses(s string) []string {
 	return result
 }
 
-
 func main() {
 	S := "leet2code3"
 	K := 10
 	fmt.Println(decodeAtIndex(S, K))
 	fmt.Println(isMatch("abcde", "*a*e"))
+	justifyto := []string{"This", "is", "an", "example", "of", "text", "justification."}
+	maxWidth := 16
+	fmt.Println(fullJustify(justifyto, maxWidth))
 }
