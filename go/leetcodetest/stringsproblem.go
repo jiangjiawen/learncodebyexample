@@ -7,6 +7,7 @@ import (
 )
 
 //68
+//https://leetcode.com/problems/text-justification/discuss/519796/Go-0ms-solution-easy-to-understand
 func fullJustify(words []string, maxWidth int) []string {
 	justify := []string{}
 	current, curLength := []string{}, 0
