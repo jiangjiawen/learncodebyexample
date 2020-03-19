@@ -1,5 +1,9 @@
 //https://medium.com/a-journey-with-go/go-understand-the-empty-interface-2d9fc1e5ec72
-package main_test
+// cmd: GO111MODULE=auto go test -bench=.
+//It takes 55 more nanoseconds for the double conversion type to empty interface
+//and then to the type back than copying the structure.
+//The time will increase if the number of fields in the structure increases:
+package main
 
 import (
 	"testing"
