@@ -18,9 +18,9 @@ func doCopy(value []string) {
 	value2 := make([]string, len(value), len(value)+1)
 	copy(value2, value)
 	value2 = append(value2, "b")
-	fmt.Printf("value=%v,copyvalue2=%v\n", value, value2)
+	fmt.Printf("value=%v, copyvalue2=%v\n", value, value2)
 	value2[0] = "z"
-	fmt.Printf("value=%v,copyvalue2=%v\n", value, value2)
+	fmt.Printf("value=%v, copyvalue2=%v\n", value, value2)
 }
 
 func main() {
