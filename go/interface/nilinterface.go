@@ -1,6 +1,5 @@
-//This is because interface values are fat pointers. 
-//The first element of this pair is the pointer to the method dispatch table for the implementation of the Bomb interface by the Explodes type, 
-//and the second element is the address of the actual Explodes object, which is nil.
+//The call to Bang succeeds because it applies to pointers to a Bomb: there is no need to dereference the pointer to call the method. 
+//The Boom method acts on a value and so a call causes pointers to be dereferenced, which causes a panic.
 package main
 
 type Explodes interface {
