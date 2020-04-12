@@ -1,3 +1,5 @@
+//https://gist.github.com/husobee/fd23681261a39699ee37
+//https://play.golang.org/p/vbnQI68jUfs
 package main
 
 import "fmt"
