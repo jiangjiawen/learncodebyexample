@@ -1,5 +1,6 @@
 //https://dave.cheney.net/2017/04/29/there-is-no-pass-by-reference-in-go
 // map is reference type
+//推荐使用指针持有者类型来代替这个术语 来自go101 感觉是混乱。
 package testMapAndSliceTest
 
 import "testing"
