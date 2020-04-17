@@ -6,7 +6,7 @@ import "fmt"
 
 type Handler func(s string) string
 
-type Middleware func(next Handler) Handler
+type Middleware func(h Handler) Handler
 
 func buildChain(h Handler,m ...Middleware) Handler {
 	if len(m)==0{
