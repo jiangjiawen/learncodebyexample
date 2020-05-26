@@ -34,34 +34,51 @@ func perfectnum(n int) bool {
 	}
 }
 
-func minSubArray(s int, nums []int) int {
-	midSave := []int{}
-	var sum, min int
+// func minSubArray(s int, nums []int) int {
+// 	midSave := []int{}
+// 	var sum, min int
 
+// 	for i := 0; i < len(nums); i++ {
+// 		if nums[i] >= s {
+// 			return 1
+// 		}
+
+// 		sum += nums[i]
+// 		midSave = append(midSave, nums[i])
+// 		if sum >= s {
+// 			for {
+// 				if sum-B[0] < s {
+// 					break
+// 				}
+// 				sum -= B[0]
+// 				B = B[1:]
+// 			}
+// 			if min == 0 || min > len(B) {
+// 				min = len(B)
+// 			}
+// 		}
+// 	}
+// 	return min
+// }
+
+func minStartValue(nums []int) int {
+	var valueNeg = 0
+	var compareFlage = 0
 	for i := 0; i < len(nums); i++ {
-		if nums[i] >= s {
-			return 1
-		}
-
-		sum += nums[i]
-		midSave = append(midSave, nums[i])
-		if sum >= s {
-			for {
-				if sum-B[0] < s {
-					break
-				}
-				sum -= B[0]
-				B = B[1:]
-			}
-			if min == 0 || min > len(B) {
-				min = len(B)
-			}
+		valueNeg += nums[i]
+		if valueNeg < compareFlage {
+			compareFlage = valueNeg
 		}
 	}
-	return min
+	if compareFlage >= 0 {
+		return 1
+	} else {
+		return -compareFlage + 1
+	}
 }
 
 func main() {
-	fmt.Println(mySqrt(8))
-	fmt.Println(perfectnum(0))
+	// fmt.Println(mySqrt(8))
+	// fmt.Println(perfectnum(0))
+	fmt.Println(minStartValue([]int{-3, 2, -3, 4, 2}))
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"reflect"
 	"strings"
 )
 
@@ -158,6 +159,40 @@ func removeInvalidParentheses(s string) []string {
 	return result
 }
 
+//844
+func backspaceCompare(S string, T string) bool {
+	var compareS = []byte{}
+	var compareT = []byte{}
+
+	var flagS = 0
+	var flagT = 0
+
+	for i := 0; i < len(S); i++ {
+		if S[i] != '#' {
+			compareS = append(compareS, S[i])
+			flagS++
+		} else {
+			if flagS != 0 {
+				compareS = compareS[:len(compareS)-1]
+				flagS--
+			}
+		}
+	}
+	for i := 0; i < len(T); i++ {
+		if T[i] != '#' {
+			compareT = append(compareT, T[i])
+			flagT++
+		} else {
+			if flagT != 0 {
+				compareT = compareT[:len(compareT)-1]
+				flagT--
+			}
+		}
+	}
+
+	return reflect.DeepEqual(compareS, compareT)
+}
+
 func main() {
 	S := "leet2code3"
 	K := 10
@@ -166,4 +201,5 @@ func main() {
 	justifyto := []string{"This", "is", "an", "example", "of", "text", "justification."}
 	maxWidth := 16
 	fmt.Println(fullJustify(justifyto, maxWidth))
+	backspaceCompare("ab#c", "ad#c")
 }
