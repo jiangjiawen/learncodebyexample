@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 //x的平方根
 func mySqrt(x int) int {
 	if x <= 1 {
@@ -77,8 +75,75 @@ func minStartValue(nums []int) int {
 	}
 }
 
+func generate(numRows int) [][]int {
+	yh := make([][]int, numRows)
+	for i := 0; i < numRows; i++ {
+		temp := make([]int, i+1)
+		if i == 0 {
+			temp[0] = 1
+		}
+		if i == 1 {
+			temp[0] = 1
+			temp[1] = 1
+		} else {
+			temp[0] = 1
+			temp[i] = 1
+			for j := 1; j < i; j++ {
+				temp[j] = yh[i-1][j] + yh[i-1][j-1]
+			}
+		}
+		yh[i] = temp
+	}
+	return yh
+}
+
+//面试51
+func reversePairs(nums []int) int {
+	var cnts = 0
+	mergeTwo(nums, 0, len(nums)-1, []int{}, &cnts)
+	return cnts
+}
+
+func merge(nums []int, start, mid, end int, temp []int, cnts *int) {
+	i, j := start, mid+1
+	for i <= mid && j <= end {
+		if nums[i] <= nums[j] {
+			temp = append(temp, nums[i])
+			i++
+		} else {
+			*cnts = *cnts + mid - i + 1
+			temp = append(temp, nums[j])
+			j++
+		}
+	}
+	for i <= mid {
+		temp = append(temp, nums[i])
+		i++
+	}
+	for j <= end {
+		temp = append(temp, nums[j])
+		j++
+	}
+	for i := 0; i < len(temp); i++ {
+		nums[start+i] = temp[i]
+	}
+	temp = []int{}
+}
+
+func mergeTwo(nums []int, start, end int, temp []int, cnts *int) {
+	if start >= end {
+		return
+	}
+	mid := (start + end) >> 1
+	mergeTwo(nums, start, mid, temp, cnts)
+	mergeTwo(nums, mid+1, end, temp, cnts)
+	merge(nums, start, mid, end, temp, cnts)
+}
+
 func main() {
 	// fmt.Println(mySqrt(8))
 	// fmt.Println(perfectnum(0))
-	fmt.Println(minStartValue([]int{-3, 2, -3, 4, 2}))
+	// fmt.Println(minStartValue([]int{-3, 2, -3, 4, 2}))
+	// fmt.Println(generate(5))
+	reversePairs([]int{1, 3, 2, 3, 1})
 }
