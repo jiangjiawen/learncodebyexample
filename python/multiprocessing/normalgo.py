@@ -1,3 +1,4 @@
+# 这个是东西准备好了，给多进程
 import multiprocessing
 import time
 import random

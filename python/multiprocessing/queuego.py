@@ -1,3 +1,4 @@
+# 这个是东西一直来，我自己这里准备好来接住。
 from multiprocessing import Process, Queue, Manager, Pool
 from time import sleep
 import random
