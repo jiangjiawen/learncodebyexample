@@ -32,12 +32,12 @@ def main():
     print('main task start')
     d = Manager().dict({1:True,2:True})
     qDoingorDone = Manager().list([])
-    pool = Pool(processes=2)
     qin = Queue()
     p1 = Process(target=put, args=(qin, ))
     p2 = Process(target=get, args=(qin, d, qDoingorDone))
     p3 = Process(target=get, args=(qin, d, qDoingorDone))
- 
+
+    # 最好加个delay 好像有同步竞争问题
     p1.start()
     p2.start()
     p3.start()
