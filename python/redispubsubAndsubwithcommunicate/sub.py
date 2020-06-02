@@ -7,7 +7,7 @@ import time
 
 channelname = 'test'
 r=redis.Redis(host='localhost', port=6379, db=0)
-p=r.publish()
+p=r.pubsub()
 p.psubscribe(channelname)
 p.parse_response()
 

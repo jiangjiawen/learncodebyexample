@@ -40,6 +40,7 @@ def main():
     # 最好加个delay 好像有同步竞争问题
     p1.start()
     p2.start()
+    sleep(1)
     p3.start()
     p1.join()
     p2.join()
