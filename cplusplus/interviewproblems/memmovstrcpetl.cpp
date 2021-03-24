@@ -61,6 +61,28 @@ int myAtoi(char* str) {
    }
    return sign * result;
 }
+
+ void my_func_strcpy(char *source, char* destination, int n)
+ {
+    char temp[n] = {'\0'};
+    int  index    = 0;
+
+    /* Copying the destination data to source data
+     */
+    while (destination[index] != '\0')
+    {
+        source[index] = destination[index];
+        index++;
+    }
+
+    /* Making the rest of the characters null ('\0') 
+     */
+    for (index = 0; index < n; index++)
+    {
+        source[index] = '\0';
+    }
+ }
+
 int main() {
    char string[] = "-32491841";
    int intVal = myAtoi(string);
