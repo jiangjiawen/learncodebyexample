@@ -1,9 +1,10 @@
+//https://www.youtube.com/watch?v=UbjxGvrDrbw&ab_channel=javidx9
+//https://stackoverflow.com/questions/16150267/mac-os-x-get-state-of-spacebar
+//https://github.com/phracker/MacOSX-SDKs/blob/master/MacOSX10.6.sdk/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h
+
 #include <iostream>
 #include <olc_net.h>
 #include <Carbon/Carbon.h>
-
-//https://stackoverflow.com/questions/16150267/mac-os-x-get-state-of-spacebar
-//https://github.com/phracker/MacOSX-SDKs/blob/master/MacOSX10.6.sdk/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h
 
 enum class CustomMsgTypes : uint32_t
 {
